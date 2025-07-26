@@ -1,0 +1,41 @@
+//gfg problem
+class Solution {
+  public:
+    int getLPSLength(string &s) {
+        // code here
+        vector<int>lps(s.size(),0);
+        int preffix=0,suffix=1;
+        
+        while(suffix<s.size()){
+            
+            if(s[preffix]==s[suffix]){
+                
+                lps[suffix]=preffix+1;
+                
+                preffix++,suffix++;
+            }else{
+                //if suffix and preffix is not same
+                
+                if(preffix==0){
+                    //if reffix is equal to zero then 
+                    //then suffix is zero and increment by 1 
+                    
+                    lps[suffix]=0;
+                    
+                    suffix++;
+                    
+                }else{
+                    //if prefix is at index 1 or any nth index then check
+                    //previous index element
+                    preffix=lps[preffix-1];
+                    
+                }
+                
+            }
+            
+        }
+        return lps[s.size()-1];
+    }
+};
+//time complexity :O(n)
+//space complexity:O(n)
